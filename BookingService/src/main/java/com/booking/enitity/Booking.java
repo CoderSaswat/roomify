@@ -17,7 +17,16 @@ public class Booking {
     private Long roomId;
     private Long customerId;
     private String status;
+    private Long hotelId;
 
+
+    public Long getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(Long hotelId) {
+        this.hotelId = hotelId;
+    }
 
     public Long getId() {
         return id;

@@ -1,19 +1,16 @@
-package com.room.entity;
+package com.hotel.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.io.Serializable;
-
-@Entity
 @Getter
 @Setter
-public class Room{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Room {
+
     private Long id;
     private String name;
     private Integer capacity;

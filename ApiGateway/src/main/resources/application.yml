@@ -18,6 +18,10 @@ spring:
           uri: lb://customer-service
           predicates:
             - Path=/customers/**
+        - id: hotel-service
+          uri: lb://hotel-service
+          predicates:
+            - Path=/hotels/**
 eureka:
   client:
     service-url:

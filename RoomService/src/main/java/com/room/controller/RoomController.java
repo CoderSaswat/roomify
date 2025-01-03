@@ -1,5 +1,7 @@
 package com.room.controller;
 
+import com.room.client.HotelClient;
+import com.room.entity.Hotel;
 import com.room.entity.Room;
 import com.room.repositoty.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,13 @@ public class RoomController {
     @Autowired
     private RoomRepository roomRepository;
 
+    @Autowired
+    private HotelClient hotelClient;
+
     @PostMapping
     public Room addRoom(@RequestBody Room room) {
+        Hotel hotel = hotelClient.getHotelById(room.getHotelId());
+        room.setName(hotel.getName()+"_"+room.getName());
         return roomRepository.save(room);
     }
 
@@ -26,11 +33,11 @@ public class RoomController {
 
     @GetMapping(path = "/{roomId}")
     public Room getRoomById(@PathVariable long roomId) {
-        Optional<Room> room = roomRepository.findById(roomId);
-        if (room.isPresent()){
-            return room.get();
-        }else{
-            throw new RuntimeException("room not found");
-        }
+        return roomRepository.findById(roomId).get();
     }
+    @GetMapping(path = "/hotel/{hotelId}")
+    public List<Room> getRoomsByHotelId(@PathVariable long hotelId) {
+        return roomRepository.findByHotelId(hotelId);
+    }
+
 }
