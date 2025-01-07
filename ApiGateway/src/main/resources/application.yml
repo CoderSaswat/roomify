@@ -1,28 +1,5 @@
-server:
-  port: 8000
 spring:
   application:
     name: api-gateway
-  cloud:
-    gateway:
-      routes:
-        - id: room-service
-          uri: lb://room-service
-          predicates:
-            - Path=/rooms/**
-        - id: booking-service
-          uri: lb://booking-service
-          predicates:
-            - Path=/bookings/**
-        - id: customer-service
-          uri: lb://customer-service
-          predicates:
-            - Path=/customers/**
-        - id: hotel-service
-          uri: lb://hotel-service
-          predicates:
-            - Path=/hotels/**
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+  config:
+    import: optional:configserver:http://localhost:8888
